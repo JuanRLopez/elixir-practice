@@ -3,6 +3,6 @@
     <p><%= link "← go back", to: "/" %></p>
     <h2>Factor</h2>
 
-    <p>Factors of <%= @num %>: <%= @factors %></p>
+    <p>Factors of <%= @num %>: <%= inspect(@factors) %></p>
   </div>
 </div>
