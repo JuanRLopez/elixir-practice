@@ -22,9 +22,6 @@ defmodule Practice do
 
   def palindrome?(str) do
     str2 = String.reverse(str)
-    answer = case str == str2 do
-      true -> "\"#{(str)}\" is a palindrome!"
-      false ->  "\"#{(str)}\" is not a palindrome."
-    end
+    str == str2
   end
 end

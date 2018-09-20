@@ -19,12 +19,15 @@ defmodule PracticeWeb.PageController do
   def factor(conn, %{"x" => x}) do
     {num, _} = Integer.parse(x)
     y = Practice.factor(num)
-    IO.puts "output #{inspect(y)}"
     render conn, "factor.html", num: x, factors: y
   end
 
   def palindrome(conn, %{"str" => str}) do
-    answer = Practice.palindrome?(str)
+    is_palindrome = Practice.palindrome?(str)
+    answer = case is_palindrome do
+      true -> "\"#{(str)}\" is a palindrome!"
+      false ->  "\"#{(str)}\" is not a palindrome."
+    end
     render conn, "palindrome.html", answer: answer
   end
 end

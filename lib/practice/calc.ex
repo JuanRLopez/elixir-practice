@@ -5,12 +5,9 @@ defmodule Practice.Calc do
   end
 
   def calc(expr) do
-    IO.puts "[BEGIN CALC]"
-
-    answer = expr
+    expr
     |> String.split
     |> Enum.map(fn x ->
-         IO.puts "[MAPPING PARTS...] #{x}"
          cond do
            # check if it is an operation
            Enum.member?(["+", "-", "*", "/"], x) -> {:op, x}
@@ -24,14 +21,10 @@ defmodule Practice.Calc do
       )
     |> convert_to_postfix
     |> process_expr
-
-    IO.puts "[END CALC]"
-    answer
   end
 
   # converts an arithmetic expression string into postfix form
   def convert_to_postfix(expr) do
-    IO.puts "[BEGIN CONVERSION]"
     op_value = %{"*" => 2, "/" => 2, "+" => 1, "-" => 1}
 
     {answer, op_stack} = Enum.reduce(expr, {[], []}, fn ({type, data}, {acc_answer, acc_op_stack}) ->
@@ -60,13 +53,11 @@ defmodule Practice.Calc do
             end
         end
       )
-    IO.puts "[END CONVERSION]: #{inspect(answer ++ op_stack)}"
     answer ++ op_stack
   end
 
   # processes an arithmetic expression in postfix form
   def process_expr(expr) do
-    IO.puts "[BEGIN TO PROCESS]"
     stack = Enum.reduce(expr, [], fn ({type, data}, acc) ->
        cond do
         # insert numbers in stack
@@ -85,7 +76,6 @@ defmodule Practice.Calc do
         end
       end
       )
-    IO.puts "[END PROCESS]"
     hd(stack)
   end
 
@@ -101,21 +91,17 @@ defmodule Practice.Calc do
 
   # finds the prime factors of a number
   def factor(x) do
-    answer = factor(x, 2, [])
+    factor(x, 2, [])
   end
 
   def factor(x, div, acc) do
-    answer = cond do
+    cond do
       x > 1 ->
         cond do
           rem(x, div) == 0 -> factor(div(x, div), 2, acc ++ [div])
           rem(x, div) != 0 -> factor(x, div + 1, acc)
         end
-
       x <= 1 -> acc
     end
-
-    IO.puts "Actual list: #{inspect(answer)}"
-    answer
   end
 end
